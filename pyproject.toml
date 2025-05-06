@@ -1,0 +1,21 @@
+[project]
+name = "mlflow-iris"
+version = "0.1.0"
+description = "This repository contains basic code to playaround with MLFlow"
+authors = [
+    {name = "Swpanil Sankla",email = "swapnil.sankla@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mlflow (>=2.21.3,<3.0.0)",
+    "scikit-learn (>=1.6.1,<2.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "mlflow_iris", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
