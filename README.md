@@ -5,6 +5,7 @@
 - Train model: Run `poetry run python src/mlflow_iris/train_iris_model.py` from command line from `mlflow-playground` directory
 - Invoke inference: Run `poetry run python src/mlflow_playground/inference_iris_model.py` from command line from `mlflow-playground` directory
 - Code is written on top of Iris dataset.
+- Using GridSearchCV to perform hyperparameter tuning and choose the best model 
 
 
 ### Iris dataset

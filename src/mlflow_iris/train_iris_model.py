@@ -1,6 +1,6 @@
 from mlflow.models import infer_signature
 from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import mlflow
@@ -59,13 +59,25 @@ def train(x_train, y_train):
     """
 
     # Create model
-    params = { "max_iter": 1000, "random_state": 8888, "multi_class": "auto", "solver": "newton-cg" }
-    logistic_regression_model = LogisticRegression(**params)
+    logistic_regression_model = LogisticRegression()
+
+    # Define the parameter grid
+    param_grid = {
+        'C': [0.1, 1, 10],
+        'solver': ['liblinear', 'saga'],
+        'max_iter': [100, 200]
+    }
+
+    # Initialize GridSearchCV
+    grid_search = GridSearchCV(estimator=logistic_regression_model, param_grid=param_grid,
+                               scoring='accuracy', cv=5)
 
     # Train model
-    logistic_regression_model.fit(x_train, y_train)
+    grid_search.fit(x_train, y_train)
 
-    return logistic_regression_model
+    # Choose the best model using grid search
+    best_model = grid_search.best_estimator_
+    return best_model
 
 
 def predict(model, x_test):
